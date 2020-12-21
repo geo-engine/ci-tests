@@ -12,9 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Update dependencies
         run: |
-          cargo install cargo-edit
-          cargo update
-          cargo upgrade --to-lockfile
+          sed -ir "s:(toolchain\: nightly).+:\1-`date +%Y-%m-%d`:g" workflow.yml
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
